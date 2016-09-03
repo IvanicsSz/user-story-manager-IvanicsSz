@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Title</title>
+</head>
+<body>
+<div class="header-container">
+    <header class="wrapper clearfix">
+        <h1 class="title">{% block title %}Scram Master{% endblock %}</h1>
+        {% block login %}
+        <nav>
+            <ul >
+              {% if not session.logged_in %}
+                <a  href="{{ url_for('login', class="title") }}">LOGIN</a>
+              {% else %}
+                  <a  href="{{ url_for('index', class="title") }}">LIST</a>
+                  <a  href="{{ url_for('story', class="title") }}">FROM</a>
+                  <a  href="{{ url_for('logout', class="title") }}">LOGOUT</a>
+              {% endif %}
+{#                <li><a href="{{ url_for('login') }}">Login</a></li>#}
+{#                <li><a href="{{ url_for('logout') }}">Logout</a></li>#}
+
+            </ul>
+        </nav>
+        {% endblock %}
+    </header>
+</div>
+{% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+  {% endfor %}
+{% block body %}
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}LOGIN{% endblock %}
+
+{% block login %}{% endblock %}
+
+{%  block body %}
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+    {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+    <p> {{ error }}</p>
+    <div style="color:#363887">{{ form.username.label(class="label", id="label")}}:  {{form.username(size=25)}}</div>
+    <div style="color:#363887">{{ form.password.label(class="label", id="label")}}:  {{form.password(size=25)}}</div>
+    {{ form.submit() }}
+
+</form>
+{% endblock %}

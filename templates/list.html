@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Sprint reporter{% endblock %}
+
+{% block login %}{{ super() }}{% endblock %}
+
+{%  block body %}
+
+<p><h2>User Story Manager</h2></p>
+
+<p><form action="/story" method="get"><button>Add a new User Story</button></form></p>
+
+<table style="border:1px solid black;" width="90%">
+    <tr>
+        <th width="5%" align="center" style="border:1px solid black;">ID</th>
+        <th width="15%" align="center" style="border:1px solid black;">Story Title</th>
+        <th width="25%" align="center" style="border:1px solid black;">User Story</th>
+        <th width="25%" align="center" style="border:1px solid black;">Acceptance Criteria</th>
+        <th width="10%" align="center" style="border:1px solid black;">Business Value</th>
+        <th width="10%" align="center" style="border:1px solid black;">Estimation</th>
+        <th width="10%" align="center" style="border:1px solid black;">Status</th>
+
+            {% for n in query %}
+            <tr>
+                <td align="center" style="border:1px solid black;">{{n.id}}</td>
+                <td align="center" style="border:1px solid black;">{{n.story_title}}</td>
+                <td align="center" style="border:1px solid black;">{{n.user_title}}</td>
+                <td align="center" style="border:1px solid black;">{{n.acceptance_criteria}}</td>
+                <td align="center" style="border:1px solid black;">{{n.business_value}}</td>
+                <td align="center" style="border:1px solid black;">{{n.estimation}}</td>
+                <td align="center" style="border:1px solid black;">{{n.status}}</td>
+                <td width="10%" align="left" style="border:1px solid black;">
+                     <a  href="story/{{ n.id }}">EDIT</a></td>
+
+                <td width="10%" align="left" style="border:1px solid black;" >
+                     <a  href="del/{{ n.id }}">DEL</a></td>
+            </tr>
+            {% endfor %}
+    </tr>
+
+</table>
+
+{% endblock %}
