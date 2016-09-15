@@ -55,17 +55,17 @@ def close_db(error):
 
 
 
-# def login_required(f):
-#     @wraps(f)
-#     def decorated_function(*args, **kwargs):
-#         if g.user is None:
-#             return redirect(url_for('login', next=request.url))
-#         return f(*args, **kwargs)
-#     return decorated_function
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get('logged_in') is None:
+            return redirect(url_for('login', next=request.url))
+        return f(*args, **kwargs)
+    return decorated_function
 
 @app.route("/")
 @app.route("/list")
-# @login_required
+@login_required
 def index():
     stories = Story.select()
     print(g.__dict__)
@@ -109,7 +109,7 @@ def story():
 def login():
     error = None
     form = LoginForm()
-    flash("Username: admin password: default")
+    # flash("Username: admin password: default")
     if request.method == 'POST':
         if request.form['username'] != app.config['USERNAME']:
             error = 'Invalid username'
@@ -117,8 +117,7 @@ def login():
             error = 'Invalid password'
         else:
             session['logged_in'] = True
-            g.user = request.form['username']
-            print(g.user)
+
             flash("You are logged in {}".format(request.form['username']))
             return redirect(url_for('story'))
     return render_template('user.html', form=form, error=error)

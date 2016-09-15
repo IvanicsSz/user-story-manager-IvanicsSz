@@ -7,10 +7,11 @@
 
 <p><h2>User Story Manager</h2></p>
 
-<p><form action="/story" method="get"><button>Add a new User Story</button></form></p>
+<p><form action="/story" method="get"><button class="btn btn-primary">Add a new User Story</button></form></p>
 
-<table style="border:1px solid black;" width="90%">
-    <tr>
+{#<table style="border:1px solid black;" width="90%">#}
+<table class="table table-striped table-hover ">
+    <tr class="info">
         <th width="5%" align="center" style="border:1px solid black;">ID</th>
         <th width="15%" align="center" style="border:1px solid black;">Story Title</th>
         <th width="25%" align="center" style="border:1px solid black;">User Story</th>
@@ -20,7 +21,8 @@
         <th width="10%" align="center" style="border:1px solid black;">Status</th>
 
             {% for n in query %}
-            <tr>
+
+            <tr class="succes">
                 <td align="center" style="border:1px solid black;">{{n.id}}</td>
                 <td align="center" style="border:1px solid black;">{{n.story_title}}</td>
                 <td align="center" style="border:1px solid black;">{{n.user_title}}</td>
@@ -29,10 +31,10 @@
                 <td align="center" style="border:1px solid black;">{{n.estimation}}</td>
                 <td align="center" style="border:1px solid black;">{{n.status}}</td>
                 <td width="10%" align="left" style="border:1px solid black;">
-                     <a  href="story/{{ n.id }}">EDIT</a></td>
+                     <a  href="story/{{ n.id }}" class="btn btn-warning">EDIT</a></td>
 
                 <td width="10%" align="left" style="border:1px solid black;" >
-                     <a  href="del/{{ n.id }}">DEL</a></td>
+                     <a  href="del/{{ n.id }}" class="btn btn-danger">DEL</a></td>
             </tr>
             {% endfor %}
     </tr>

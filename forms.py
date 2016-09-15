@@ -17,4 +17,4 @@ class NameForm(Form):
 class LoginForm(Form):
     username = StringField(u'What is your user name?', validators=[DataRequired()])
     password = PasswordField(u'What is your password?', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Login')

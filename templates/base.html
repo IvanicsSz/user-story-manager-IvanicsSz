@@ -1,34 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+     <title>Title</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://bootswatch.com/cerulean/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="header-container">
-    <header class="wrapper clearfix">
-        <h1 class="title">{% block title %}Scram Master{% endblock %}</h1>
-        {% block login %}
-        <nav>
-            <ul >
-              {% if not session.logged_in %}
-                <a  href="{{ url_for('login', class="title") }}">LOGIN</a>
-              {% else %}
-                  <a  href="{{ url_for('index', class="title") }}">LIST</a>
-                  <a  href="{{ url_for('story', class="title") }}">FROM</a>
-                  <a  href="{{ url_for('logout', class="title") }}">LOGOUT</a>
-              {% endif %}
-{#                <li><a href="{{ url_for('login') }}">Login</a></li>#}
-{#                <li><a href="{{ url_for('logout') }}">Logout</a></li>#}
 
-            </ul>
-        </nav>
+{#<div class="header-container">#}
+{#    <header class="wrapper clearfix">#}
+        {% block login %}
+            <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Scrum Master</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+          {% if not session.logged_in %}
+            <li><a  href="#" data-toggle="modal" data-target="#myModal">LOGIN</a></li>
+          {% else %}
+              <li><a  href="{{ url_for('index') }}" >LIST</a></li>
+              <li><a  href="{{ url_for('story') }}" >FROM</a></li>
+              <li><a  href="{{ url_for('logout') }}" >LOGOUT</a></li>
+          {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
         {% endblock %}
-    </header>
-</div>
+
 {% for message in get_flashed_messages() %}
-    <div class=flash>{{ message }}</div>
+    <div class="alert alert-dismissible alert-info">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>{% if message %}{{ message }} {% endif %}</strong>
+</div>
+{#    <div class=flash></div>#}
   {% endfor %}
 {% block body %}
 
