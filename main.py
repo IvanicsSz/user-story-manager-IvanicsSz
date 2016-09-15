@@ -134,7 +134,7 @@ def delete(story_id):
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
-    # flash('You were logged out')
+    # flash('You are logged out')
     return 'You were logged out'
 
 # class Method(views.MethodView):
